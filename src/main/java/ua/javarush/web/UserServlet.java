@@ -10,33 +10,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
 @WebServlet("/users")
 public class UserServlet extends HttpServlet {
-  private UserService userService = new UserService();
-
-
+    private UserService userService = new UserService();
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServlet.class);
-   private Integer gameCounter = 0;
+    private Integer gameCounter = 0;
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LOGGER.info("HttpSession create.");
         User user = new User(req.getParameter("text"));
-
         if (userService.checkInputText(user.getText())) {
             req.getRequestDispatcher("ufo.jsp").forward(req, resp);
-
-        }else {
+        } else {
             req.getRequestDispatcher("gameOver.jsp").forward(req, resp);
         }
-
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        LOGGER.info("HttpSession create.");
         LOGGER.info("UserServlet started.");
         req.getRequestDispatcher("users.jsp").forward(req, resp);
-        req.setAttribute("id", gameCounter );
+        HttpSession session = req.getSession();
+        gameCounter = (Integer) session.getAttribute("count");
+        if (gameCounter == null) {
+            session.setAttribute("count", 1);
+        } else {
+            session.setAttribute("count", gameCounter++);
+        }
     }
 }

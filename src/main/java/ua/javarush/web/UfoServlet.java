@@ -1,5 +1,4 @@
 package ua.javarush.web;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.javarush.User.User;
@@ -16,18 +15,15 @@ import java.io.IOException;
 @WebServlet("/ufo")
 public class UfoServlet extends HttpServlet {
     private UserService userService = new UserService();
-
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServlet.class);
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User(req.getParameter("text"));
-
         if (userService.checkInputText(user.getText())) {
             req.getRequestDispatcher("bridge.jsp").forward(req, resp);
-        }else {
+        } else {
             req.getRequestDispatcher("gameOver.jsp").forward(req, resp);
         }
-
     }
 
     @Override

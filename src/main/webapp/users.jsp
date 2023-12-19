@@ -1,3 +1,4 @@
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,8 +10,13 @@
   Your answer: <input type="text" name="text"><br>
     <input type="submit" value="Submit" >
     <br>
+    <h3> Your count: </h3>
+
+
+        </body>
+
+
     <br>
 </form>
-<h5>Gamecounter ${id} </h5>
 </body>
 </html>

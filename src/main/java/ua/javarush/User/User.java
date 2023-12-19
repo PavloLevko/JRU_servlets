@@ -1,7 +1,5 @@
 package ua.javarush.User;
 
-import java.util.Objects;
-
 public class User {
     private String text;
 

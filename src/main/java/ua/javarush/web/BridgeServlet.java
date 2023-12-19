@@ -21,19 +21,16 @@ public class BridgeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = new User(req.getParameter("text"));
-
         if (userService.checkInputText(user.getText())) {
             req.getRequestDispatcher("true.jsp").forward(req, resp);
-        }else {
+        } else {
             req.getRequestDispatcher("gameOver.jsp").forward(req, resp);
         }
-
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOGGER.info("BridgeServlet started");
         req.getRequestDispatcher("bridge.jsp").forward(req, resp);
-
     }
 }
