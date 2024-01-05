@@ -1,7 +1,8 @@
 package ua.javarush.models;
 
-public class NegativAnsver extends Answer{
+public class NegativAnsver extends Answer {
     String message;
+
     public NegativAnsver(String answerStatus) {
         super(answerStatus);
     }

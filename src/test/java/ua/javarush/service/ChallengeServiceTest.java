@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class ChallengeServiceTest {
     ChallengeService challengeService = new ChallengeService();
 
-@Test
+    @Test
     public void checkInputTextYes() {
-    String textYes = "yes";
-       Answer answerYes = new PositiveAnsver(textYes);
-       String expected = answerYes.getAnswerStatus();
-       assertEquals(expected, challengeService.checkInputText(textYes).getAnswerStatus());
+        String textYes = "yes";
+        Answer answerYes = new PositiveAnsver(textYes);
+        String expected = answerYes.getAnswerStatus();
+        assertEquals(expected, challengeService.checkInputText(textYes).getAnswerStatus());
     }
 
     @Test
@@ -29,10 +29,10 @@ class ChallengeServiceTest {
     }
 
     @Test
-    public void checkInputTextException(){
-    String someText = "qwert";
-    String massageException = "Invalid param";
-    Answer answer = new NegativAnsver(someText);
-    assertThrows(InvalidParamException.class, () -> challengeService.checkInputText(someText).getAnswerStatus(), massageException );
+    public void checkInputTextException() {
+        String someText = "qwert";
+        String massageException = "Invalid param";
+        Answer answer = new NegativAnsver(someText);
+        assertThrows(InvalidParamException.class, () -> challengeService.checkInputText(someText).getAnswerStatus(), massageException);
     }
 }

@@ -14,7 +14,9 @@ public class ChallengeService {
 
     public ChallengeService() {
     }
- private static final String CancelChallenge = "You rejected call. \n Game over";
+
+    private static final String CancelChallenge = "You rejected call. \n Game over";
+
     public Answer checkInputText(String question) {
         Answer answer;
         LOGGER.info("Method checkInputText start.");
@@ -22,15 +24,14 @@ public class ChallengeService {
             LOGGER.info("Method return true.");
             answer = new PositiveAnsver(ANSWER_TRUE);
 
-        } else if(question.equalsIgnoreCase(ANSWER_FALSE)) {
+        } else if (question.equalsIgnoreCase(ANSWER_FALSE)) {
             LOGGER.info("Method return false.");
             answer = new NegativAnsver(ANSWER_FALSE, CancelChallenge);
-        } else
-        {
+        } else {
             throw new InvalidParamException("Invalid param");
-            }
-        return answer;
-            }
         }
+        return answer;
+    }
+}
 
 

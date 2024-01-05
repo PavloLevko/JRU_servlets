@@ -1,4 +1,5 @@
 package ua.javarush.web;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,9 +13,10 @@ import java.io.IOException;
 @WebServlet("/")
 public class WelcomeController extends HttpServlet {
     private static final Logger LOGGER = LoggerFactory.getLogger(WelcomeController.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       LOGGER.info("Welcome started.");
+        LOGGER.info("Welcome started.");
         req.getRequestDispatcher("welcome.jsp").forward(req, resp);
     }
 }
