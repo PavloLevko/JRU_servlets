@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import ua.javarush.models.Answer;
 import ua.javarush.models.NegativAnsver;
 import ua.javarush.service.ChallengeService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,15 +16,14 @@ import java.io.IOException;
 public class YouAreWinController extends HttpServlet {
     private ChallengeService service = new ChallengeService();
     private static final Logger LOGGER = LoggerFactory.getLogger(ChallengeController.class);
-    private Integer gameCounter = 0;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOGGER.info("HttpSession create.");
         Answer answer = service.checkInputText(req.getParameter("buttonValue"));
         if (answer.getAnswerStatus().equals(Answer.ANSWER_TRUE)) {
-            req.getRequestDispatcher("challenge.jsp").forward(req, resp);
-            LOGGER.info("Redirect to challenge.jsp.");
+            req.getRequestDispatcher("welcome.jsp").forward(req, resp);
+            LOGGER.info("Redirect to welcome.jsp.");
         } else {
             NegativAnsver negativAnsver = (NegativAnsver) answer;
             req.setAttribute("answer", negativAnsver.getMessage());
@@ -38,6 +36,5 @@ public class YouAreWinController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOGGER.info("YouAreWin started.");
         req.getRequestDispatcher("youAreWin.jsp").forward(req, resp);
-
     }
 }

@@ -17,7 +17,6 @@ import java.io.IOException;
 public class OnTheCapitanBridgeController extends HttpServlet {
     private ChallengeService service = new ChallengeService();
     private static final Logger LOGGER = LoggerFactory.getLogger(ChallengeController.class);
-    private Integer gameCounter = 0;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,6 +36,5 @@ public class OnTheCapitanBridgeController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOGGER.info("OnTheCapitanBridge started.");
         req.getRequestDispatcher("onTheCapitanBridge.jsp").forward(req, resp);
-
     }
 }

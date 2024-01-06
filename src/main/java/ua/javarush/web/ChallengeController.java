@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import ua.javarush.models.Answer;
 import ua.javarush.models.NegativAnsver;
 import ua.javarush.service.ChallengeService;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +16,6 @@ import java.io.IOException;
 public class ChallengeController extends HttpServlet {
     private ChallengeService service = new ChallengeService();
     private static final Logger LOGGER = LoggerFactory.getLogger(ChallengeController.class);
-    private Integer gameCounter = 0;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,6 +35,5 @@ public class ChallengeController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOGGER.info("Challenge started.");
         req.getRequestDispatcher("challenge.jsp").forward(req, resp);
-
     }
 }
