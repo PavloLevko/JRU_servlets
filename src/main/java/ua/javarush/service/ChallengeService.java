@@ -11,11 +11,10 @@ public class ChallengeService {
     private static final Logger LOGGER = LoggerFactory.getLogger(ChallengeService.class);
     private static final String ANSWER_TRUE = "yes";
     private static final String ANSWER_FALSE = "no";
+    private static final String CancelChallenge = "You rejected call. \n Game over";
 
     public ChallengeService() {
     }
-
-    private static final String CancelChallenge = "You rejected call. \n Game over";
 
     public Answer checkInputText(String question) {
         Answer answer;
@@ -32,6 +31,20 @@ public class ChallengeService {
         }
         return answer;
     }
+
+    public String getRedirectPath(Answer answer, String endPage, String nextPage) {
+        LOGGER.info("Method getRedirectPath start.");
+        if (answer.getAnswerStatus().equals(Answer.ANSWER_TRUE)) {
+            LOGGER.info("Redirect to next page.");
+            return nextPage;
+        } else if (answer.getAnswerStatus().equals(Answer.ANSWER_FALSE)) {
+            LOGGER.info("Redirect to next page.");
+            return endPage;
+        } else {
+            throw new InvalidParamException("Invalid param");
+        }
+    }
+
 }
 
 

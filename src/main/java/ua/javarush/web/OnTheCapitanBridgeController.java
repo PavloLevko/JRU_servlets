@@ -15,21 +15,16 @@ import java.io.IOException;
 
 @WebServlet("/onTheCapitanBridge")
 public class OnTheCapitanBridgeController extends HttpServlet {
-    private ChallengeService service = new ChallengeService();
     private static final Logger LOGGER = LoggerFactory.getLogger(ChallengeController.class);
+    private ChallengeService service = new ChallengeService();
+    public String endOver = "gameOver.jsp";
+    public String nextPage = "youAreWin.jsp";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Answer answer = service.checkInputText(req.getParameter("buttonValue"));
-        if (answer.getAnswerStatus().equals(Answer.ANSWER_TRUE)) {
-            req.getRequestDispatcher("youAreWin.jsp").forward(req, resp);
-            LOGGER.info("Redirect to youAreWin.jsp.");
-        } else {
-            NegativAnsver negativAnsver = (NegativAnsver) answer;
-            req.setAttribute("answer", negativAnsver.getMessage());
-            req.getRequestDispatcher("gameOver.jsp").forward(req, resp);
-            LOGGER.info("Redirect to gameOver.jsp.");
-        }
+        req.setAttribute("answer", answer);
+        req.getRequestDispatcher(service.getRedirectPath(answer, endOver, nextPage)).forward(req, resp);
     }
 
     @Override

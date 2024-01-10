@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import ua.javarush.models.Answer;
 import ua.javarush.models.NegativAnsver;
 import ua.javarush.service.ChallengeService;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,22 +15,17 @@ import java.io.IOException;
 
 @WebServlet("/youAreWin")
 public class YouAreWinController extends HttpServlet {
-    private ChallengeService service = new ChallengeService();
     private static final Logger LOGGER = LoggerFactory.getLogger(ChallengeController.class);
+    private ChallengeService service = new ChallengeService();
+    public String endOver = "gameOver.jsp";
+    public String nextPage = "welcome.jsp";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOGGER.info("HttpSession create.");
         Answer answer = service.checkInputText(req.getParameter("buttonValue"));
-        if (answer.getAnswerStatus().equals(Answer.ANSWER_TRUE)) {
-            req.getRequestDispatcher("welcome.jsp").forward(req, resp);
-            LOGGER.info("Redirect to welcome.jsp.");
-        } else {
-            NegativAnsver negativAnsver = (NegativAnsver) answer;
-            req.setAttribute("answer", negativAnsver.getMessage());
-            req.getRequestDispatcher("gameOver.jsp").forward(req, resp);
-            LOGGER.info("Redirect to gameOver.jsp.");
-        }
+        req.setAttribute("answer", answer);
+        req.getRequestDispatcher(service.getRedirectPath(answer, endOver, nextPage)).forward(req, resp);
     }
 
     @Override
